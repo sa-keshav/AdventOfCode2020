@@ -6,6 +6,7 @@ RESULT : int = 2020
 FILE = "input.csv"
 #FILE = "test.csv"
 
+
 def part1(input: List[int]) -> List[int]:
     output: List[int] = []
 
@@ -15,7 +16,7 @@ def part1(input: List[int]) -> List[int]:
             b = input[j]
             if a + b == RESULT:
                 output.append(a * b)
-                print("a is: {}, b is: {}, a+b = {}".format(a, b, a+b))
+                print("a is: {}, b is: {} \na + b = {} \na * b = {}".format(a, b, a+b, a*b))
     return output
     
 def part2(input: List[int]) -> List[int]:
@@ -29,7 +30,7 @@ def part2(input: List[int]) -> List[int]:
                 c = input[k]
                 if a + b + c == RESULT:
                     output.append(a * b * c)
-                    print("a is: {}, b is: {}, c is: {}, a+b+c = {}".format(a, b, c, a+b+c))
+                    print("a is: {}, b is: {}, c is: {}\na + b + c = {} \na * b * c = {}".format(a, b, c, a+b+c, a*b*c))
     return output
 
 def readCSV(filename: str) -> List[str]:
@@ -40,13 +41,18 @@ def readCSV(filename: str) -> List[str]:
             result.append(int(row[0]))
     return result
 
-################################# MAIN ###################################
+
+print("############## Day 1 ##############")
 input = readCSV(FILE)
 
-result1 = part1(input)
-print(result1)
-result2 = part2(input)
-print(result2)
+print("\nPart1:")
+print("-----------------")
+part1(input)
+print()
+print("\nPart2: ")
+print("-----------------")
+part2(input)
+
 
 
     
