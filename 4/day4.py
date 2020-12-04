@@ -4,11 +4,10 @@ from typing import Dict, List
 sys.path.append("../")
 import readFile
 import string
+from process import toMap
 
 FILE = "input.txt"
 #FILE = "test.txt"
-
-validKeys : List[str] = ['byr', 'iyr','eyr','hgt','hcl','ecl','pid'] 
 
 def isValidDate(input: str, least: str, most: str) -> bool:
     return len(input) == 4 and input >= least and input <= most  
@@ -56,50 +55,19 @@ valid : Dict[str, callable]= {
     'pid': isPid
 }
 
-def split_list(input: List[str], delimiter: str) -> List[List[str]]:
-    result: List[List[str]] = []
-    rounds = input.count(delimiter)
-    for i in range(rounds):
-        position = input.index(delimiter)
-        element = input[:position]
-        result.append(element)
-        input = input[position+1:]      
-    result.append(input) #take the last element too
-    return result
 
-def findElements(input: List[str]) -> List[List[str]]:
-    return " ".join(input).split(" ")
-    
-
-def findValue(substr: str, input: List[str]) -> str:
-    index = [i for i, elem in enumerate(input) if substr in elem]
-    index = index[0]
-    temp = input[index].split(":")
-    return temp[1]
-
-def makeMap(input: List[str]) -> dict[str, str]:
-    map = {}
-    for i in input:
-        temp = i.split(":")
-        map[temp[0]] = temp[1]
-    return map
-
-def isValidPart1(input: str) -> bool:
-    input = findElements(input)
-    map = makeMap(input)
+def isValidPart1(passport: Dict[str, str]) -> bool:
     for k in valid.keys():
-        if k not in map.keys():
+        if k not in passport.keys():
             return False   
     return True
 
-def isValidPart2(input: str) -> bool:
-    input = findElements(input)
-    map = makeMap(input)
+def isValidPart2(passport: Dict[str, str]) -> bool:
     for k, v in valid.items():
-        if k not in map.keys():
+        if k not in passport.keys():
             return False
 
-        if not v(map[k]):
+        if not v(passport[k]):
             return False     
     return True
 
@@ -107,14 +75,14 @@ def isValidPart2(input: str) -> bool:
 
     
 input = readFile.readFile(FILE)
-elements = split_list(input, "")
+passports = toMap(input)
 ctr1 = ctr2 = 0
-for e in elements:
-    if isValidPart1(e):
+for p in passports:
+    if isValidPart1(p):
         ctr1 += 1
 
-for e in elements:
-    if isValidPart2(e):
+for p in passports:
+    if isValidPart2(p):
         ctr2 += 1
 
 print("############## Day 4 ##############")
