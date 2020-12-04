@@ -84,7 +84,15 @@ def makeMap(input: List[str]) -> dict[str, str]:
         map[temp[0]] = temp[1]
     return map
 
-def isValid(input: str) -> bool:
+def isValidPart1(input: str) -> bool:
+    input = findElements(input)
+    map = makeMap(input)
+    for k in valid.keys():
+        if k not in map.keys():
+            return False   
+    return True
+
+def isValidPart2(input: str) -> bool:
     input = findElements(input)
     map = makeMap(input)
     for k, v in valid.items():
@@ -100,10 +108,19 @@ def isValid(input: str) -> bool:
     
 input = readFile.readFile(FILE)
 elements = split_list(input, "")
-ctr = 0
+ctr1 = ctr2 = 0
 for e in elements:
-    if isValid(e):
-        ctr += 1
+    if isValidPart1(e):
+        ctr1 += 1
 
-print(ctr)  
+for e in elements:
+    if isValidPart2(e):
+        ctr2 += 1
+
+print("############## Day 4 ##############")
+print()
+print("Part1: ", ctr1)
+print()
+print("Part2: ", ctr2)
+ 
 

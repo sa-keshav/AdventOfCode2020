@@ -20,7 +20,7 @@ def findTrees(right: int, down: int, input: List[str]):
     return ctr
 
 input = readFile.readFile(FILE)
-print("############## Day 2 ##############")
+print("############## Day 3 ##############")
 print()
 print("Part1: ",findTrees(3,1, input))
 
