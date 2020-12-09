@@ -42,7 +42,7 @@ for i in input:
 
 maxSeatId = max(seatIds)
 seatIds.sort()
-mySeatId = sum(range(seatIds[0],seatIds[-1]+1)) - sum(seatIds)
+mySeatId = sum2(range(seatIds[0],seatIds[-1]+1)) - sum2(seatIds)
 
 
 print()
