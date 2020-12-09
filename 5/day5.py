@@ -13,10 +13,11 @@ MIN_COLUMN = 0
 MAX_COLUMN = 7
 
 input = readFile.readFile(FILE)
-seatIds : List[int] = []
+seatIds: List[int] = []
+
 
 def processStr(input: str, min: int, max: int, upper: str, lower: str) -> int:
-    number : int = 0
+    number: int = 0
     for r in input[:-1]:
         if r == lower:
             max = math.floor((max + min) / 2)
@@ -33,8 +34,8 @@ for i in input:
     row = i[:7]
     column = i[7:]
 
-    row = processStr(row, MIN_ROW, MAX_ROW, upper = 'B', lower = 'F')
-    column = processStr(column, MIN_COLUMN, MAX_COLUMN, upper = 'R', lower = 'L')
+    row = processStr(row, MIN_ROW, MAX_ROW, upper='B', lower='F')
+    column = processStr(column, MIN_COLUMN, MAX_COLUMN, upper='R', lower='L')
 
     seatId = (row * 8) + column
     seatIds.append(seatId)
@@ -42,7 +43,7 @@ for i in input:
 
 maxSeatId = max(seatIds)
 seatIds.sort()
-mySeatId = sum2(range(seatIds[0],seatIds[-1]+1)) - sum2(seatIds)
+mySeatId = sum(range(seatIds[0], seatIds[-1]+1)) - sum(seatIds)
 
 
 print()

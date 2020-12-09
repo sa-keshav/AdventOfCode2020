@@ -7,6 +7,7 @@ import readFile
 FILE = "input.txt"
 #FILE = "test.txt"
 
+
 def split_list(input: List[str], delimiter: str) -> List[List[str]]:
     result: List[List[str]] = []
     while True:
@@ -23,7 +24,7 @@ def split_list(input: List[str], delimiter: str) -> List[List[str]]:
 input = readFile.readFile(FILE)
 answers = split_list(input, "")
 results: List[str] = []
-sum1 : int = 0
+sum1: int = 0
 sum2 = 0
 for a in answers:
     temp = ''.join(a)
@@ -41,8 +42,8 @@ for group in answers:
             if question in person_in:
                 ctr += 1
         if ctr == person_count-1:
-            sum2 += 1 
+            sum2 += 1
 
 
-print("SUM 1: ",sum1)
-print("SUM 2:",sum2)
+print("SUM 1: ", sum1)
+print("SUM 2:", sum2)

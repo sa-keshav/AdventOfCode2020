@@ -9,11 +9,11 @@ FILE = "input.txt"
 
 
 def process(input: List[str]) -> Tuple[int, bool]:
-    acc :int = 0
+    acc: int = 0
     i = 0
     indexes = []
     while(i < len(input)):
-        if i in indexes: 
+        if i in indexes:
             return acc, False
 
         indexes.append(i)
@@ -29,9 +29,10 @@ def process(input: List[str]) -> Tuple[int, bool]:
             acc += argument
         if command == 'jmp':
             i += argument
-    
+
     return acc, True
-    
+
+
 input = readFile.readFile(FILE)
 ######part1############
 
@@ -39,7 +40,7 @@ acc, _ = process(input)
 
 ########part2##########
 
-acc2:int = 0
+acc2: int = 0
 for i in range(len(input)):
 
     temp = input[i].split(" ")

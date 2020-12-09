@@ -19,14 +19,15 @@ def findTrees(right: int, down: int, input: List[str]):
         index += right
     return ctr
 
+
 input = readFile.readFile(FILE)
 print("############## Day 3 ##############")
 print()
-print("Part1: ",findTrees(3,1, input))
+print("Part1: ", findTrees(3, 1, input))
 
-output = findTrees(1,1,input) 
-output *= findTrees(3,1,input) 
-output *= findTrees(5,1,input)
-output *= findTrees(7,1,input)
-output *= findTrees(1,2,input)
-print("Part2: ",output)
+output = findTrees(1, 1, input)
+output *= findTrees(3, 1, input)
+output *= findTrees(5, 1, input)
+output *= findTrees(7, 1, input)
+output *= findTrees(1, 2, input)
+print("Part2: ", output)

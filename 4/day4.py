@@ -1,25 +1,30 @@
 #!/usr/bin/env python3
+from process import toMap
+import string
 import sys
 from typing import Dict, List
 sys.path.append("../")
 import readFile
-import string
-from process import toMap
 
 FILE = "input.txt"
 #FILE = "test.txt"
 
+
 def isValidDate(input: str, least: str, most: str) -> bool:
-    return len(input) == 4 and input >= least and input <= most  
+    return len(input) == 4 and input >= least and input <= most
+
 
 def isByr(input: str) -> bool:
     return isValidDate(input, '1920', '2002')
 
+
 def isIyr(input: str) -> bool:
     return isValidDate(input, '2010', '2020')
 
+
 def isEyr(input: str) -> bool:
     return isValidDate(input, '2020', '2030')
+
 
 def isHgt(input: str) -> bool:
     nr: int = 0
@@ -31,21 +36,24 @@ def isHgt(input: str) -> bool:
         return nr >= 59 and nr <= 76
     return False
 
+
 def isHcl(input: str) -> bool:
-    if len(input) ==7 and '#' in input:
+    if len(input) == 7 and '#' in input:
         hairColor = input[1:]
         return all(c in string.hexdigits for c in hairColor)
     return False
 
+
 def isEcl(input: str) -> bool:
-    validColors :List[str] = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
+    validColors: List[str] = ['amb', 'blu', 'brn', 'gry', 'grn', 'hzl', 'oth']
     return input in validColors
+
 
 def isPid(input: str) -> bool:
     return len(input) == 9 and input.isdigit()
 
 
-valid : Dict[str, callable]= {
+valid: Dict[str, callable] = {
     'byr': isByr,
     'iyr': isIyr,
     'eyr': isEyr,
@@ -59,8 +67,9 @@ valid : Dict[str, callable]= {
 def isValidPart1(passport: Dict[str, str]) -> bool:
     for k in valid.keys():
         if k not in passport.keys():
-            return False   
+            return False
     return True
+
 
 def isValidPart2(passport: Dict[str, str]) -> bool:
     for k, v in valid.items():
@@ -68,12 +77,10 @@ def isValidPart2(passport: Dict[str, str]) -> bool:
             return False
 
         if not v(passport[k]):
-            return False     
+            return False
     return True
 
 
-
-    
 input = readFile.readFile(FILE)
 passports = toMap(input)
 ctr1 = ctr2 = 0
@@ -90,5 +97,3 @@ print()
 print("Part1: ", ctr1)
 print()
 print("Part2: ", ctr2)
- 
-
