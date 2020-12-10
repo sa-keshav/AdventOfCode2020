@@ -5,8 +5,10 @@ sys.path.append("../")
 import readFile
 
 FILE = "input.txt"
-#FILE = "test.txt"
 PREAMBLE_LENGTH: int = 25
+
+#FILE = "test.txt"
+#PREAMBLE_LENGTH: int = 5
 
 
 def isIn(preamble: List[int], actual: int) -> bool:
@@ -25,6 +27,30 @@ def findFirstInvalidNumber(input: List[int]) -> int:
             return actual
 
 
+def findWeaknessList(input:List[int]) -> Tuple[bool, List[int]]:
+    sum : int = 0
+    for j in range(len(input)):
+        sum += input[j] 
+        if sum == firstInvalidNumber:
+            return True, input[:j+1]
+        if sum > firstInvalidNumber:
+           return False, None 
+    return False, None
+
 input = readFile.readFile(FILE)
-input = [int(i) for i in input]
-print(findFirstInvalidNumber(input))
+input = [int(i) for i in input] #convert list of str to int
+firstInvalidNumber = findFirstInvalidNumber(input)
+
+indexOfInvalidNumber = input.index(firstInvalidNumber)
+newInput = input[:indexOfInvalidNumber]
+weaknessList: List[int] = []
+
+for i in range(len(newInput)):
+    nextInput = newInput[i:]
+    isWeaknessList, weaknessList = findWeaknessList(nextInput)
+    if isWeaknessList:
+        break
+
+print(weaknessList)
+result = max(weaknessList) + min(weaknessList)
+print(result)
